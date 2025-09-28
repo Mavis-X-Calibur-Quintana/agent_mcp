@@ -11,17 +11,13 @@ class Output(BaseModel):
 
 parser = JsonOutputParser(pydantic_object=Output)
 format_instructions = parser.get_format_instructions()
+# print(format_instructions)
 
 agent = initialize_agent(
     tools=create_calc_tools(),
     llm=llm,
     agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
     verbose=True
-)
-
-output_parser = JsonOutputParser(
-    agent=agent,
-    output_parser=JsonOutputParser()
 )
 
 
@@ -32,6 +28,9 @@ prompt = chat_prompt_template.format_prompt(
     请阅读下面的问题，并返回一个严格的JSON对象，不能使用Markdown代码块包裹！
     格式要求：
     {format_instructions}
+
+    问题：
+    100+100=?
     """
 )
 

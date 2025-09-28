@@ -1,11 +1,12 @@
 from langchain_openai import ChatOpenAI
 from pydantic import SecretStr, BaseModel, Field
-from langchain_core.tools import tool
+from langchain_core.tools import tool, Tool
+from langchain_experimental.utilities import PythonREPL
 
 from common.chat_prompt_template import chat_prompt_template
 
 llm = ChatOpenAI(
-    model="qwen-plus",
+    model="qwen3-max",
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     api_key=SecretStr("sk-d7f462f5a5d4447cad77ccffc6195a50"),
     streaming=True
@@ -19,7 +20,8 @@ class AddInputArgs(BaseModel):
 
 @tool(
     description="add two number",
-    args_schema=AddInputArgs
+    args_schema=AddInputArgs,
+    return_direct=False
 )
 def add(a, b):
     return a + b

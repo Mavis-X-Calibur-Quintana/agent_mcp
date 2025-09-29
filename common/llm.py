@@ -2,6 +2,7 @@ from langchain_openai import ChatOpenAI
 from pydantic import SecretStr, BaseModel, Field
 from langchain_core.tools import tool, Tool
 from langchain_experimental.utilities import PythonREPL
+from langchain_community.agent_toolkits import FileManagementToolkit
 
 from common.chat_prompt_template import chat_prompt_template
 
@@ -40,5 +41,5 @@ llm_with_tools = llm.bind_tools(create_calc_tools())
 
 chain = chat_prompt_template | llm_with_tools
 
-
-
+file_toolkit = FileManagementToolkit(root_dir="E:\python\project\.temp")
+file_tools = file_toolkit.get_tools()

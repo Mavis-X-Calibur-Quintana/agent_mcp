@@ -25,20 +25,13 @@ async def create_playwright_stdio_client():
             tools = await load_mcp_tools(session)
             print(tools)
 
-            # agent = initialize_agent(
-            #     tools=tools,
-            #     llm=llm,
-            #     agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
-            #     verbose=True
-            # )
-
             agent = create_react_agent(
                 tools=tools,
                 model=llm,
                 debug=True
             )
 
-            resp = await agent.ainvoke(input={"message": [{"user": "在百度中查询北京今天的天气"}]})
+            resp = await agent.ainvoke(input={"messages": [{"role": "user", "content": "在百度中查询北京今天的天气"}]})
             print(resp)
 
 

@@ -13,8 +13,10 @@ file_tools = FileManagementToolkit(root_dir="E:\\AI\\agent_mcp\\agent\\.temp").g
 llm_with_tools = llm_qwen.bind_tools(tools=file_tools)
 chain = multi_chat_prompt | llm_with_tools | StrOutputParser()
 
+
 def get_session_history(session_id:str):
     return FileChatMessageHistory(f'{session_id}.json')
+
 
 chat_with_history = RunnableWithMessageHistory(
     runnable=chain,

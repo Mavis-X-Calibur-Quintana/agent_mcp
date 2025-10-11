@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "alibabacloud-bailian20231229==1.8.2",
     "chroma>=0.2.0",
     "chromadb>=1.1.1",
     "dashscope>=1.24.6",
